@@ -5,7 +5,7 @@ from collections import namedtuple
 Batch = namedtuple('Batch',['data'])
 
 class PredictorMxNet:
-    def __init__(self, mprefix, epoch, size, ctx=mx.cpu()):
+    def __init__(self, mprefix, epoch, size, ctx=mx.gpu()):
         self.size = size
         sym, arg_params, aux_params = mx.model.load_checkpoint(prefix=mprefix,
                                                                    epoch=epoch)
