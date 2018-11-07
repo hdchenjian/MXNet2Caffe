@@ -7,7 +7,8 @@ import traceback
 from array import array
 
 parser = argparse.ArgumentParser(description='Convert MXNet model to Caffe model')
-parser.add_argument('--mx-model',        type=str, default='/var/darknet/insightface/models/model-r50-am-lfw/model')
+#parser.add_argument('--mx-model',        type=str, default='/var/darknet/insightface/models/model-r50-am-lfw/model')
+parser.add_argument('--mx-model',        type=str, default='/var/darknet/insightface/models/model-r100-ii/model')
 parser.add_argument('--mx-epoch',        type=int, default=0)
 parser.add_argument('--cf-prototxt', type=str, default='model_caffe/face/facega2.prototxt')
 parser.add_argument('--cf-model',        type=str, default='model_caffe/face/facega2.caffemodel')

@@ -33,7 +33,6 @@ def compare_models(prefix_mxnet, prefix_caffe, size):
         print(out_mx[0][i], out_caffe_data[0][i])
     print(type(netcaffe.net.blobs))
     #print(netcaffe.net.blobs.keys())
-    blob_name = 'stage1_unit1_relu1' # 2
     blob_name = 'stage1_unit1_bn3' # 3
     #blob_name = 'stage1_unit1_conv2'
     blob_name = 'stage1_unit1_sc'
@@ -43,7 +42,12 @@ def compare_models(prefix_mxnet, prefix_caffe, size):
     blob_name = 'stage4_unit3_bn3' #103
     blob_name = 'bn1' # 105
     #blob_name = 'pre_fc1'
-    blob_name = 'stage1_unit1_bn3'
+    blob_name = 'stage1_unit2_relu1'
+    blob_name = '_plus0' #6
+    blob_name = 'stage1_unit1_bn3' #3
+    blob_name = 'stage1_unit1_relu1' # 2
+    blob_name = 'stage1_unit1_bn1' # 1
+    #blob_name = 'relu0' # 0
     out_caffe = netcaffe.blob_by_name(blob_name)
     print(type(out_caffe.data), type(out_caffe.data.tolist()), len(out_caffe.data.flat))
     count = 0
@@ -54,10 +58,10 @@ def compare_models(prefix_mxnet, prefix_caffe, size):
             print(index, element)
             count += 1
         index += 1
-    '''
-    for i in range(0, len(netcaffe.net.params[blob_name][0].data.flat)):
+    for i in range(0, 5):
         print(i, netcaffe.net.params[blob_name][0].data.flat[i], netcaffe.net.params[blob_name][1].data.flat[i],
               netcaffe.net.params[blob_name + '_scale'][0].data.flat[i], netcaffe.net.params[blob_name + '_scale'][1].data.flat[i])
+    '''
     index = 0
     for _w in netcaffe.net.params['conv0'][0].data.flat:
         if index < 10: print(index, _w)
@@ -77,6 +81,7 @@ def compare_models(prefix_mxnet, prefix_caffe, size):
     
 if __name__ == "__main__":
     prefix_mxnet = "/var/darknet/insightface/models/model-r50-am-lfw/model"
+    prefix_mxnet = "/var/darknet/insightface/models/model-r100-ii/model"
     prefix_caffe = "model_caffe/face/facega2"
     size = (1, 3, 112, 112)
     compare_models(prefix_mxnet, prefix_caffe, size)
