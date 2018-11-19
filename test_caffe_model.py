@@ -98,10 +98,10 @@ def compare_models(prefix_caffe):
     caffemodel = prefix_caffe + 'det3_bgr.caffemodel'
     net_48 = caffe.Net(deploy,caffemodel,caffe.TEST)
 
-    img = cv2.imread('face1.jpg')
-    caffe_img = (img.copy()-127.5)/128
+    caffe_img = cv2.imread('face1.jpg')
+    caffe_img = (caffe_img-127.5)/128
     origin_h,origin_w,ch = caffe_img.shape
-    rectangles = [[127.0, 118.0, 481.0, 473.0, 0.9980586171150208], [353.0, 198.0, 394.0, 239.0, 0.6727402210235596]]
+    rectangles = [[127.0, 118.0, 481.0, 473.0, 0.9980586171150208]]
     net_48.blobs['data'].reshape(len(rectangles),3,48,48)
     crop_number = 0
     for rectangle in rectangles:
