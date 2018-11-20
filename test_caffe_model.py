@@ -18,6 +18,7 @@ Output:
 	rectangles: same as input
 '''
 def NMS(rectangles,threshold,type):
+    print rectangles, 'nms'
     sorted(rectangles,key=itemgetter(4),reverse=True)
     result_rectangles = rectangles
     number_of_rects = len(result_rectangles)
@@ -38,6 +39,7 @@ def NMS(rectangles,threshold,type):
                 cur_rect_to_compare += 1    # skip to next rectangle            
             rects_to_compare -= 1
         cur_rect += 1   # finished comparing for current rectangle
+    print result_rectangles == rectangles, 'nms'
     return result_rectangles
 
 '''
@@ -55,6 +57,7 @@ Output:
 	rectangles: face positions and landmarks
 '''
 def filter_face_48net(cls_prob,roi,pts,rectangles,width,height,threshold):
+    print cls_prob,roi,pts,rectangles,width,height,threshold
     boundingBox = []
     rect_num = len(rectangles)
     for i in range(rect_num):
@@ -101,19 +104,42 @@ def compare_models(prefix_caffe):
     caffe_img = cv2.imread('face1.jpg')
     caffe_img = (caffe_img-127.5)/128
     origin_h,origin_w,ch = caffe_img.shape
-    rectangles = [[127.0, 118.0, 481.0, 473.0, 0.9980586171150208]]
+    rectangles = [[177, 92, 293 + 177, 413 + 92, 0.9980586171150208]]
     net_48.blobs['data'].reshape(len(rectangles),3,48,48)
     crop_number = 0
     for rectangle in rectangles:
         crop_img = caffe_img[int(rectangle[1]):int(rectangle[3]), int(rectangle[0]):int(rectangle[2])]
         scale_img = cv2.resize(crop_img,(48,48))
+        print scale_img.shape
         scale_img = np.swapaxes(scale_img, 0, 2)
-        net_48.blobs['data'].data[crop_number] = scale_img 
+        #print scale_img.shape, sum(scale_img[0,0,:])
+        #print scale_img[0,0,:]
+        '''
+        scale_img = np.ones((3, 48, 48), dtype=np.float32)
+        scale_img = (scale_img - 127.5) * 0.0078125
+        '''
+        net_48.blobs['data'].data[crop_number] = scale_img
         crop_number += 1
     out = net_48.forward()
-    cls_prob = out['prob1']
-    roi_prob = out['conv6-2']
-    pts_prob = out['conv6-3']
+    '''
+    for layer_name in ['conv1', 'pool1', 'conv2', 'pool2', 'conv3', 'pool3', 'conv4', 'conv5']:
+        tmp = net_48.blobs[layer_name]
+        print(layer_name, tmp.data.shape, type(tmp))
+        index = 0
+        for _o in tmp.data.flat:
+            if index < 10: print(index, _o)
+            else: break
+            index += 1
+        index = 0
+    for _w in net_48.params['conv5'][0].data.flat:
+        if index < 10: print(index, _w)
+        else: break
+        index += 1
+    '''
+    roi_prob = out['conv6-2'] # 4
+    pts_prob = out['conv6-3'] # 10
+    cls_prob = out['prob1'] # 2
+    #print pts_prob
     rectangles = filter_face_48net(cls_prob,roi_prob,pts_prob,rectangles,origin_w,origin_h,threshold[2])
     print 'real: ', [178.0, 117.0, 479.0, 498.0]
     print rectangles

@@ -12,7 +12,7 @@ parser.add_argument('--cf-prototxt', type=str, default='model_caffe/48net.protot
 parser.add_argument('--cf-model',        type=str, default='model_caffe/det3_bgr.caffemodel')
 args = parser.parse_args()
 
-net = caffe.Net(args.cf_prototxt, caffe.TRAIN)
+net = caffe.Net(args.cf_prototxt, args.cf_model, caffe.TRAIN)
 network_keys = []
 f = open(args.cf_prototxt, 'rU')
 for line in f.readlines():
@@ -37,51 +37,24 @@ for i_key,key_i in enumerate(network_keys):
         if 'data' == key_i:
             continue
         elif 'conv' in key_i:
+            if '-' in key_i and key_i != 'conv6-3': continue
             float_array = array('f', net.params[key_i][0].data.flat)
+            #print 'conv', float_array[0:5]
             float_array.tofile(weight_file)
-            '''
-            print(type(net.params[key_i][0].data), len(arg_params[key_mx].asnumpy().flat), arg_params[key_mx].asnumpy().shape)
-            print(len(float_array))
-            print(float_array[0:10])
-            print(float_array[-10:])
-            count = 0
-            for tmp in arg_params[key_mx].asnumpy().flat:
-                print(count, tmp)
-                count += 1
-            '''
-            if len(net.params[key_i]) >= 2:
+            if len(net.params[key_i]) == 2:
                 #print(i_key, key_i, 'has bias')
                 float_array = array('f', net.params[key_i][1].data.flat)
                 float_array.tofile(weight_file)
-        elif 'bn' in key_i or 'fc' in key_i or 'sc' in key_i:
-            print("warnig")
-            key_mx = key_i + '_moving_mean'
-            net.params[key_i][0].data.flat = aux_params[key_mx].asnumpy().flat
-            net.params[key_i][2].data[...] = 1
-            float_array = array('f', aux_params[key_mx].asnumpy().flat)
-            float_array.tofile(weight_file)
-
-            key_mx = key_i + '_moving_var'
-            net.params[key_i][2].data[...] = 1
-            net.params[key_i][1].data.flat = aux_params[key_mx].asnumpy().flat
-            float_array = array('f', aux_params[key_mx].asnumpy().flat)
-            float_array.tofile(weight_file)
-
-            key_mx = key_i + '_gamma'
-            net.params[key_i + '_scale'][0].data.flat = arg_params[key_mx].asnumpy().flat 
-            float_array = array('f', arg_params[key_mx].asnumpy().flat)
-            float_array.tofile(weight_file)
-
-            key_mx = key_i + '_beta'
-            net.params[key_i + '_scale'][1].data.flat = arg_params[key_mx].asnumpy().flat 
-            float_array = array('f', arg_params[key_mx].asnumpy().flat)
-            float_array.tofile(weight_file)
+            else:
+                print(i_key, key_i, 'error')
         elif 'prelu' in key_i:
+            #if key_i == 'prelu5': break
             assert (len(net.params[key_i]) == 1)
             float_array = array('f', net.params[key_i][0].data.flat)
+            print 'prelu', float_array[0:5], len(float_array)
             float_array.tofile(weight_file)
         else:
-            #sys.exit("Warning!    Unknown layer:{}".format(key_i))
+            #print("Warning!    Unknown layer:{}".format(key_i))
             pass
         print("% 3d | %s initialized." %(i_key, key_i.ljust(40)))
     except KeyError as e:
