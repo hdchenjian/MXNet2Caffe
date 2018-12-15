@@ -80,8 +80,8 @@ def compare_models(prefix_mxnet, prefix_caffe, size):
     print "done"
     
 if __name__ == "__main__":
-    prefix_mxnet = "/var/darknet/insightface/models/model-r50-am-lfw/model"
-    prefix_mxnet = "/var/darknet/insightface/models/model-r100-ii/model"
-    prefix_caffe = "model_caffe/face/facega2"
+    prefix_mxnet = "/media/luyao/video_send_back/arcface/model-r50-am-lfw/model"
+    #prefix_mxnet = "/var/darknet/insightface/models/model-r100-ii/model"
+    prefix_caffe = "/home/luyao/git/MXNet2Caffe/model_caffe/face/facega2"
     size = (1, 3, 112, 112)
     compare_models(prefix_mxnet, prefix_caffe, size)
