@@ -25,7 +25,7 @@ layer {
 
 layer {
   bottom: "conv1"
-  top: "conv1"
+  top: "bn1"
   name: "bn1"
   type: "BatchNorm"
   batch_norm_param {
@@ -35,8 +35,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv1"
-  top: "conv1"
+  bottom: "bn1"
+  top: "bn1"
   name: "bn1_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -45,8 +45,8 @@ layer {
 layer {
   name: "relu1"
   type: "ReLU"
-  bottom: "conv1"
-  top: "conv1"
+  bottom: "bn1"
+  top: "relu1"
   relu_param{
     negative_slope: 0.1
   }
@@ -57,7 +57,7 @@ layer {
 layer{
   name: "conv2"
   type: "Convolution"
-  bottom: "conv1"
+  bottom: "relu1"
   top: "conv2"
   convolution_param {
     bias_term: false
@@ -70,7 +70,7 @@ layer{
 
 layer {
   bottom: "conv2"
-  top: "conv2"
+  top: "bn2"
   name: "bn2"
   type: "BatchNorm"
   batch_norm_param {
@@ -80,8 +80,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv2"
-  top: "conv2"
+  bottom: "bn2"
+  top: "bn2"
   name: "bn2_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -90,8 +90,8 @@ layer {
 layer {
   name: "relu2"
   type: "ReLU"
-  bottom: "conv2"
-  top: "conv2"
+  bottom: "bn2"
+  top: "relu2"
   relu_param{
     negative_slope: 0.1
   }
@@ -100,7 +100,7 @@ layer {
 layer{
   name: "conv3"
   type: "Convolution"
-  bottom: "conv2"
+  bottom: "relu2"
   top: "conv3"
   convolution_param {
     bias_term: false
@@ -113,7 +113,7 @@ layer{
 
 layer {
   bottom: "conv3"
-  top: "conv3"
+  top: "bn3"
   name: "bn3"
   type: "BatchNorm"
   batch_norm_param {
@@ -123,8 +123,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv3"
-  top: "conv3"
+  bottom: "bn3"
+  top: "bn3"
   name: "bn3_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -133,8 +133,8 @@ layer {
 layer {
   name: "relu3"
   type: "ReLU"
-  bottom: "conv3"
-  top: "conv3"
+  bottom: "bn3"
+  top: "relu3"
   relu_param{
     negative_slope: 0.1
   }		
@@ -143,7 +143,7 @@ layer {
 layer{
   name: "conv4"
   type: "Convolution"
-  bottom: "conv3"
+  bottom: "relu3"
   top: "conv4"
   convolution_param {
     bias_term: false
@@ -156,7 +156,7 @@ layer{
 
 layer {
   bottom: "conv4"
-  top: "conv4"
+  top: "bn4"
   name: "bn4"
   type: "BatchNorm"
   batch_norm_param {
@@ -166,8 +166,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv4"
-  top: "conv4"
+  bottom: "bn4"
+  top: "bn4"
   name: "bn4_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -176,8 +176,8 @@ layer {
 layer {
   name: "relu4"
   type: "ReLU"
-  bottom: "conv4"
-  top: "conv4"
+  bottom: "bn4"
+  top: "relu4"
   relu_param{
     negative_slope: 0.1
   }		
@@ -186,8 +186,8 @@ layer {
 layer {
   name: "_plus1"
   type: "Eltwise"
-  bottom: "conv2"
-  bottom: "conv4"
+  bottom: "relu2"
+  bottom: "relu4"
   top: "_plus1"
   eltwise_param { operation: SUM }
 }
@@ -210,7 +210,7 @@ layer{
 
 layer {
   bottom: "conv5"
-  top: "conv5"
+  top: "bn5"
   name: "bn5"
   type: "BatchNorm"
   batch_norm_param {
@@ -220,8 +220,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv5"
-  top: "conv5"
+  bottom: "bn5"
+  top: "bn5"
   name: "bn5_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -230,8 +230,8 @@ layer {
 layer {
   name: "relu5"
   type: "ReLU"
-  bottom: "conv5"
-  top: "conv5"
+  bottom: "bn5"
+  top: "relu5"
   relu_param{
     negative_slope: 0.1
   }		
@@ -240,7 +240,7 @@ layer {
 layer{
   name: "conv6"
   type: "Convolution"
-  bottom: "conv5"
+  bottom: "relu5"
   top: "conv6"
   convolution_param {
     bias_term: false
@@ -253,7 +253,7 @@ layer{
 
 layer {
   bottom: "conv6"
-  top: "conv6"
+  top: "bn6"
   name: "bn6"
   type: "BatchNorm"
   batch_norm_param {
@@ -263,8 +263,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv6"
-  top: "conv6"
+  bottom: "bn6"
+  top: "bn6"
   name: "bn6_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -273,8 +273,8 @@ layer {
 layer {
   name: "relu6"
   type: "ReLU"
-  bottom: "conv6"
-  top: "conv6"
+  bottom: "bn6"
+  top: "relu6"
   relu_param{
     negative_slope: 0.1
   }		
@@ -283,7 +283,7 @@ layer {
 layer{
   name: "conv7"
   type: "Convolution"
-  bottom: "conv6"
+  bottom: "relu6"
   top: "conv7"
   convolution_param {
     bias_term: false
@@ -296,7 +296,7 @@ layer{
 
 layer {
   bottom: "conv7"
-  top: "conv7"
+  top: "bn7"
   name: "bn7"
   type: "BatchNorm"
   batch_norm_param {
@@ -306,8 +306,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv7"
-  top: "conv7"
+  bottom: "bn7"
+  top: "bn7"
   name: "bn7_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -316,8 +316,8 @@ layer {
 layer {
   name: "relu7"
   type: "ReLU"
-  bottom: "conv7"
-  top: "conv7"
+  bottom: "bn7"
+  top: "relu7"
   relu_param{
     negative_slope: 0.1
   }		
@@ -326,8 +326,8 @@ layer {
 layer {
   name: "_plus2"
   type: "Eltwise"
-  bottom: "conv5"
-  bottom: "conv7"
+  bottom: "relu5"
+  bottom: "relu7"
   top: "_plus2"
   eltwise_param { operation: SUM }
 }
@@ -350,7 +350,7 @@ layer{
 
 layer {
   bottom: "conv8"
-  top: "conv8"
+  top: "bn8"
   name: "bn8"
   type: "BatchNorm"
   batch_norm_param {
@@ -360,8 +360,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv8"
-  top: "conv8"
+  bottom: "bn8"
+  top: "bn8"
   name: "bn8_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -370,8 +370,8 @@ layer {
 layer {
   name: "relu8"
   type: "ReLU"
-  bottom: "conv8"
-  top: "conv8"
+  bottom: "bn8"
+  top: "relu8"
   relu_param{
     negative_slope: 0.1
   }		
@@ -380,7 +380,7 @@ layer {
 layer{
   name: "conv9"
   type: "Convolution"
-  bottom: "conv8"
+  bottom: "relu8"
   top: "conv9"
   convolution_param {
     bias_term: false
@@ -393,7 +393,7 @@ layer{
 
 layer {
   bottom: "conv9"
-  top: "conv9"
+  top: "bn9"
   name: "bn9"
   type: "BatchNorm"
   batch_norm_param {
@@ -403,8 +403,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv9"
-  top: "conv9"
+  bottom: "bn9"
+  top: "bn9"
   name: "bn9_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -413,8 +413,8 @@ layer {
 layer {
   name: "relu9"
   type: "ReLU"
-  bottom: "conv9"
-  top: "conv9"
+  bottom: "bn9"
+  top: "relu9"
   relu_param{
     negative_slope: 0.1
   }		
@@ -423,7 +423,7 @@ layer {
 layer{
   name: "conv10"
   type: "Convolution"
-  bottom: "conv9"
+  bottom: "relu9"
   top: "conv10"
   convolution_param {
     bias_term: false
@@ -436,7 +436,7 @@ layer{
 
 layer {
   bottom: "conv10"
-  top: "conv10"
+  top: "bn10"
   name: "bn10"
   type: "BatchNorm"
   batch_norm_param {
@@ -446,8 +446,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv10"
-  top: "conv10"
+  bottom: "bn10"
+  top: "bn10"
   name: "bn10_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -456,8 +456,8 @@ layer {
 layer {
   name: "relu10"
   type: "ReLU"
-  bottom: "conv10"
-  top: "conv10"
+  bottom: "bn10"
+  top: "relu10"
   relu_param{
     negative_slope: 0.1
   }		
@@ -466,8 +466,8 @@ layer {
 layer {
   name: "_plus3"
   type: "Eltwise"
-  bottom: "conv8"
-  bottom: "conv10"
+  bottom: "relu8"
+  bottom: "relu10"
   top: "_plus3"
   eltwise_param { operation: SUM }
 }
@@ -490,7 +490,7 @@ layer{
 
 layer {
   bottom: "conv11"
-  top: "conv11"
+  top: "bn11"
   name: "bn11"
   type: "BatchNorm"
   batch_norm_param {
@@ -500,8 +500,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv11"
-  top: "conv11"
+  bottom: "bn11"
+  top: "bn11"
   name: "bn11_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -510,8 +510,8 @@ layer {
 layer {
   name: "relu11"
   type: "ReLU"
-  bottom: "conv11"
-  top: "conv11"
+  bottom: "bn11"
+  top: "relu11"
   relu_param{
     negative_slope: 0.1
   }		
@@ -520,7 +520,7 @@ layer {
 layer{
   name: "conv12"
   type: "Convolution"
-  bottom: "conv11"
+  bottom: "relu11"
   top: "conv12"
   convolution_param {
     bias_term: false
@@ -533,7 +533,7 @@ layer{
 
 layer {
   bottom: "conv12"
-  top: "conv12"
+  top: "bn12"
   name: "bn12"
   type: "BatchNorm"
   batch_norm_param {
@@ -543,8 +543,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv12"
-  top: "conv12"
+  bottom: "bn12"
+  top: "bn12"
   name: "bn12_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -553,8 +553,8 @@ layer {
 layer {
   name: "relu12"
   type: "ReLU"
-  bottom: "conv12"
-  top: "conv12"
+  bottom: "bn12"
+  top: "relu12"
   relu_param{
     negative_slope: 0.1
   }		
@@ -563,7 +563,7 @@ layer {
 layer{
   name: "conv13"
   type: "Convolution"
-  bottom: "conv12"
+  bottom: "relu12"
   top: "conv13"
   convolution_param {
     bias_term: false
@@ -576,7 +576,7 @@ layer{
 
 layer {
   bottom: "conv13"
-  top: "conv13"
+  top: "bn13"
   name: "bn13"
   type: "BatchNorm"
   batch_norm_param {
@@ -586,8 +586,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv13"
-  top: "conv13"
+  bottom: "bn13"
+  top: "bn13"
   name: "bn13_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -596,8 +596,8 @@ layer {
 layer {
   name: "relu13"
   type: "ReLU"
-  bottom: "conv13"
-  top: "conv13"
+  bottom: "bn13"
+  top: "relu13"
   relu_param{
     negative_slope: 0.1
   }		
@@ -606,8 +606,8 @@ layer {
 layer {
   name: "_plus4"
   type: "Eltwise"
-  bottom: "conv11"
-  bottom: "conv13"
+  bottom: "relu11"
+  bottom: "relu13"
   top: "_plus4"
   eltwise_param { operation: SUM }
 }
@@ -630,7 +630,7 @@ layer{
 
 layer {
   bottom: "conv14"
-  top: "conv14"
+  top: "bn14"
   name: "bn14"
   type: "BatchNorm"
   batch_norm_param {
@@ -640,8 +640,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv14"
-  top: "conv14"
+  bottom: "bn14"
+  top: "bn14"
   name: "bn14_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -650,8 +650,8 @@ layer {
 layer {
   name: "relu14"
   type: "ReLU"
-  bottom: "conv14"
-  top: "conv14"
+  bottom: "bn14"
+  top: "relu14"
   relu_param{
     negative_slope: 0.1
   }		
@@ -660,7 +660,7 @@ layer {
 layer{
   name: "conv15"
   type: "Convolution"
-  bottom: "conv14"
+  bottom: "relu14"
   top: "conv15"
   convolution_param {
     bias_term: false
@@ -673,7 +673,7 @@ layer{
 
 layer {
   bottom: "conv15"
-  top: "conv15"
+  top: "bn15"
   name: "bn15"
   type: "BatchNorm"
   batch_norm_param {
@@ -683,8 +683,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv15"
-  top: "conv15"
+  bottom: "bn15"
+  top: "bn15"
   name: "bn15_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -693,8 +693,8 @@ layer {
 layer {
   name: "relu15"
   type: "ReLU"
-  bottom: "conv15"
-  top: "conv15"
+  bottom: "bn15"
+  top: "relu15"
   relu_param{
     negative_slope: 0.1
   }		
@@ -703,7 +703,7 @@ layer {
 layer{
   name: "conv16"
   type: "Convolution"
-  bottom: "conv15"
+  bottom: "relu15"
   top: "conv16"
   convolution_param {
     bias_term: false
@@ -716,7 +716,7 @@ layer{
 
 layer {
   bottom: "conv16"
-  top: "conv16"
+  top: "bn16"
   name: "bn16"
   type: "BatchNorm"
   batch_norm_param {
@@ -726,8 +726,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv16"
-  top: "conv16"
+  bottom: "bn16"
+  top: "bn16"
   name: "bn16_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -736,8 +736,8 @@ layer {
 layer {
   name: "relu16"
   type: "ReLU"
-  bottom: "conv16"
-  top: "conv16"
+  bottom: "bn16"
+  top: "relu16"
   relu_param{
     negative_slope: 0.1
   }		
@@ -746,8 +746,8 @@ layer {
 layer {
   name: "_plus5"
   type: "Eltwise"
-  bottom: "conv14"
-  bottom: "conv16"
+  bottom: "relu14"
+  bottom: "relu16"
   top: "_plus5"
   eltwise_param { operation: SUM }
 }
@@ -770,7 +770,7 @@ layer{
 
 layer {
   bottom: "conv17"
-  top: "conv17"
+  top: "bn17"
   name: "bn17"
   type: "BatchNorm"
   batch_norm_param {
@@ -780,8 +780,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv17"
-  top: "conv17"
+  bottom: "bn17"
+  top: "bn17"
   name: "bn17_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -790,8 +790,8 @@ layer {
 layer {
   name: "relu17"
   type: "ReLU"
-  bottom: "conv17"
-  top: "conv17"
+  bottom: "bn17"
+  top: "relu17"
   relu_param{
     negative_slope: 0.1
   }		
@@ -800,7 +800,7 @@ layer {
 layer{
   name: "conv18"
   type: "Convolution"
-  bottom: "conv17"
+  bottom: "relu17"
   top: "conv18"
   convolution_param {
     bias_term: false
@@ -813,7 +813,7 @@ layer{
 
 layer {
   bottom: "conv18"
-  top: "conv18"
+  top: "bn18"
   name: "bn18"
   type: "BatchNorm"
   batch_norm_param {
@@ -823,8 +823,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv18"
-  top: "conv18"
+  bottom: "bn18"
+  top: "bn18"
   name: "bn18_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -833,8 +833,8 @@ layer {
 layer {
   name: "relu18"
   type: "ReLU"
-  bottom: "conv18"
-  top: "conv18"
+  bottom: "bn18"
+  top: "relu18"
   relu_param{
     negative_slope: 0.1
   }		
@@ -843,7 +843,7 @@ layer {
 layer{
   name: "conv19"
   type: "Convolution"
-  bottom: "conv18"
+  bottom: "relu18"
   top: "conv19"
   convolution_param {
     bias_term: false
@@ -856,7 +856,7 @@ layer{
 
 layer {
   bottom: "conv19"
-  top: "conv19"
+  top: "bn19"
   name: "bn19"
   type: "BatchNorm"
   batch_norm_param {
@@ -866,8 +866,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv19"
-  top: "conv19"
+  bottom: "bn19"
+  top: "bn19"
   name: "bn19_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -876,8 +876,8 @@ layer {
 layer {
   name: "relu19"
   type: "ReLU"
-  bottom: "conv19"
-  top: "conv19"
+  bottom: "bn19"
+  top: "relu19"
   relu_param{
     negative_slope: 0.1
   }		
@@ -886,7 +886,7 @@ layer {
 layer{
   name: "conv20"
   type: "Convolution"
-  bottom: "conv19"
+  bottom: "relu19"
   top: "conv20"
   convolution_param {
     bias_term: false
@@ -899,7 +899,7 @@ layer{
 
 layer {
   bottom: "conv20"
-  top: "conv20"
+  top: "bn20"
   name: "bn20"
   type: "BatchNorm"
   batch_norm_param {
@@ -909,8 +909,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv20"
-  top: "conv20"
+  bottom: "bn20"
+  top: "bn20"
   name: "bn20_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -919,8 +919,8 @@ layer {
 layer {
   name: "relu20"
   type: "ReLU"
-  bottom: "conv20"
-  top: "conv20"
+  bottom: "bn20"
+  top: "relu20"
   relu_param{
     negative_slope: 0.1
   }		
@@ -929,7 +929,7 @@ layer {
 layer{
   name: "conv21"
   type: "Convolution"
-  bottom: "conv20"
+  bottom: "relu20"
   top: "conv21"
   convolution_param {
     bias_term: true
@@ -945,7 +945,7 @@ layer{
 layer{
   name: "conv22"
   type: "Convolution"
-  bottom: "conv19"
+  bottom: "relu19"
   top: "conv22"
   convolution_param {
     bias_term: false
@@ -958,7 +958,7 @@ layer{
 
 layer {
   bottom: "conv22"
-  top: "conv22"
+  top: "bn22"
   name: "bn22"
   type: "BatchNorm"
   batch_norm_param {
@@ -969,8 +969,8 @@ layer {
 }
 
 layer {
-  bottom: "conv22"
-  top: "conv22"
+  bottom: "bn22"
+  top: "bn22"
   name: "bn22_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -979,8 +979,8 @@ layer {
 layer {
   name: "relu22"
   type: "ReLU"
-  bottom: "conv22"
-  top: "conv22"
+  bottom: "bn22"
+  top: "relu22"
   relu_param{
     negative_slope: 0.1
   }		
@@ -989,7 +989,7 @@ layer {
 layer {
   name: "upsample1"
   type: "Upsample"
-  bottom: "conv22"
+  bottom: "relu22"
   top: "upsample1"
 }
 
@@ -1018,7 +1018,7 @@ layer{
 
 layer {
   bottom: "conv23"
-  top: "conv23"
+  top: "bn23"
   name: "bn23"
   type: "BatchNorm"
   batch_norm_param {
@@ -1028,8 +1028,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv23"
-  top: "conv23"
+  bottom: "bn23"
+  top: "bn23"
   name: "bn23_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -1038,8 +1038,8 @@ layer {
 layer {
   name: "relu23"
   type: "ReLU"
-  bottom: "conv23"
-  top: "conv23"
+  bottom: "bn23"
+  top: "relu23"
   relu_param{
     negative_slope: 0.1
   }		
@@ -1048,7 +1048,7 @@ layer {
 layer{
   name: "conv24"
   type: "Convolution"
-  bottom: "conv23"
+  bottom: "relu23"
   top: "conv24"
   convolution_param {
     bias_term: false
@@ -1061,7 +1061,7 @@ layer{
 
 layer {
   bottom: "conv24"
-  top: "conv24"
+  top: "bn24"
   name: "bn24"
   type: "BatchNorm"
   batch_norm_param {
@@ -1071,8 +1071,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv24"
-  top: "conv24"
+  bottom: "bn24"
+  top: "bn24"
   name: "bn24_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -1081,8 +1081,8 @@ layer {
 layer {
   name: "relu24"
   type: "ReLU"
-  bottom: "conv24"
-  top: "conv24"
+  bottom: "bn24"
+  top: "relu24"
   relu_param{
     negative_slope: 0.1
   }		
@@ -1091,7 +1091,7 @@ layer {
 layer{
   name: "conv25"
   type: "Convolution"
-  bottom: "conv24"
+  bottom: "relu24"
   top: "conv25"
   convolution_param {
     bias_term: false
@@ -1104,7 +1104,7 @@ layer{
 
 layer {
   bottom: "conv25"
-  top: "conv25"
+  top: "bn25"
   name: "bn25"
   type: "BatchNorm"
   batch_norm_param {
@@ -1114,8 +1114,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv25"
-  top: "conv25"
+  bottom: "bn25"
+  top: "bn25"
   name: "bn25_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -1124,8 +1124,8 @@ layer {
 layer {
   name: "relu25"
   type: "ReLU"
-  bottom: "conv25"
-  top: "conv25"
+  bottom: "bn25"
+  top: "relu25"
   relu_param{
     negative_slope: 0.1
   }		
@@ -1134,7 +1134,7 @@ layer {
 layer{
   name: "conv26"
   type: "Convolution"
-  bottom: "conv25"
+  bottom: "relu25"
   top: "conv26"
   convolution_param {
     bias_term: false
@@ -1147,7 +1147,7 @@ layer{
 
 layer {
   bottom: "conv26"
-  top: "conv26"
+  top: "bn26"
   name: "bn26"
   type: "BatchNorm"
   batch_norm_param {
@@ -1157,8 +1157,8 @@ layer {
   }
 }
 layer {
-  bottom: "conv26"
-  top: "conv26"
+  bottom: "bn26"
+  top: "bn26"
   name: "bn26_scale"
   type: "Scale"
   scale_param { bias_term: true }
@@ -1167,8 +1167,8 @@ layer {
 layer {
   name: "relu26"
   type: "ReLU"
-  bottom: "conv26"
-  top: "conv26"
+  bottom: "bn26"
+  top: "relu26"
   relu_param{
     negative_slope: 0.1
   }		
@@ -1177,7 +1177,7 @@ layer {
 layer{
   name: "conv27"
   type: "Convolution"
-  bottom: "conv26"
+  bottom: "relu26"
   top: "conv27"
   convolution_param {
     bias_term: true

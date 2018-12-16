@@ -37,6 +37,7 @@ darknet_weight = weight_file.read()
 weight_file.close()
 print(struct.unpack("iiiii", darknet_weight[:20]), len(darknet_weight), (len(darknet_weight) - 20) / 4.0)
 darknet_weight = struct.unpack("f" * ((len(darknet_weight) - 20) / 4), darknet_weight[20:])
+print(len(darknet_weight))
 
 def get_weight_num(a):
     acc = 1
@@ -52,26 +53,32 @@ for i_key,key_i in enumerate(network_keys):
             continue
         elif 'conv' in key_i:
             print(type(net.params[key_i][0].data), net.params[key_i][0].data.shape, type(net.params[key_i][0].data.shape))
-	    net.params[key_i][0].data.flat = darknet_weight[weight_index : get_weight_num(net.params[key_i][0].data.shape)]
+	    net.params[key_i][0].data.flat = darknet_weight[weight_index : weight_index + get_weight_num(net.params[key_i][0].data.shape)]
             weight_index += get_weight_num(net.params[key_i][0].data.shape)
+            if len(net.params[key_i]) > 1:
+                print('has bias', key_i, len(net.params[key_i]), get_weight_num(net.params[key_i][1].data.shape))
+                net.params[key_i][1].data.flat = darknet_weight[weight_index : weight_index + get_weight_num(net.params[key_i][1].data.shape)]
+                weight_index += get_weight_num(net.params[key_i][1].data.shape)
         elif 'bn' in key_i:
             print(type(net.params[key_i][0].data), net.params[key_i][0].data.shape, type(net.params[key_i][0].data.shape))
-            continue
+            #continue
             #key_mx = key_i + '_moving_mean'
-            net.params[key_i][0].data.flat = darknet_weight[weight_index : get_weight_num(net.params[key_i][0].data.shape)]
+            net.params[key_i][0].data.flat = darknet_weight[weight_index : weight_index + get_weight_num(net.params[key_i][0].data.shape)]
             net.params[key_i][2].data[...] = 1
+            #print(weight_index, get_weight_num(net.params[key_i][0].data.shape),
+            #      darknet_weight[weight_index : weight_index + get_weight_num(net.params[key_i][0].data.shape)][0:10])
             weight_index += get_weight_num(net.params[key_i][0].data.shape)
 
             #key_mx = key_i + '_moving_var'
             net.params[key_i][2].data[...] = 1
-            net.params[key_i][1].data.flat = darknet_weight[weight_index : get_weight_num(net.params[key_i][0].data.shape)]
+            net.params[key_i][1].data.flat = darknet_weight[weight_index : weight_index + get_weight_num(net.params[key_i][0].data.shape)]
             weight_index += get_weight_num(net.params[key_i][0].data.shape)
 
             #key_mx = key_i + '_gamma'
-            net.params[key_i + '_scale'][0].data.flat = darknet_weight[weight_index : get_weight_num(net.params[key_i][0].data.shape)]
+            net.params[key_i + '_scale'][0].data.flat = darknet_weight[weight_index : weight_index + get_weight_num(net.params[key_i][0].data.shape)]
             weight_index += get_weight_num(net.params[key_i][0].data.shape)
 
-            net.params[key_i + '_scale'][1].data.flat = darknet_weight[weight_index : get_weight_num(net.params[key_i][0].data.shape)]
+            net.params[key_i + '_scale'][1].data.flat = darknet_weight[weight_index : weight_index + get_weight_num(net.params[key_i][0].data.shape)]
             weight_index += get_weight_num(net.params[key_i][0].data.shape)
             
         else:
