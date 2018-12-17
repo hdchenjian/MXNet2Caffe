@@ -18,11 +18,15 @@ def compare_models(prefix_caffe):
     print(type(net.blobs['conv21'].data[0]))
     print(type(net.blobs['conv21'].data), net.blobs['conv21'].data.shape)
     for i in range(1, 28):
-        blob_name = 'relu' + str(i)
+        blob_name = 'conv' + str(i)
         if blob_name in net.blobs:
             print(blob_name, net.blobs[blob_name].data[0][0][0][0:10])
             print('')
-        blob_name = 'conv' + str(i)
+        blob_name = 'bn' + str(i)
+        if blob_name in net.blobs:
+            print(blob_name, net.blobs[blob_name].data[0][0][0][0:10])
+            print('')
+        blob_name = 'relu' + str(i)
         if blob_name in net.blobs:
             print(blob_name, net.blobs[blob_name].data[0][0][0][0:10])
             print('')
@@ -45,5 +49,5 @@ def compare_models(prefix_caffe):
     
     
 if __name__ == "__main__":
-    prefix_caffe = "model_caffe/yolo-tiny-more/yolov3-tiny-more"
+    prefix_caffe = "model_caffe/yolo-tiny-more/yolov3-tiny-more_split_conv_layer"
     compare_models(prefix_caffe)

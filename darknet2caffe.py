@@ -13,8 +13,10 @@ from array import array
 
 parser = argparse.ArgumentParser(description='Convert MXNet model to Caffe model')
 #parser.add_argument('--mx-model',        type=str, default='/var/darknet/insightface/models/model-r50-am-lfw/model')
-parser.add_argument('--cf-prototxt', type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more.prototxt')
-parser.add_argument('--cf-model',        type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more.caffemodel')
+#parser.add_argument('--cf-prototxt', type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more.prototxt')
+#parser.add_argument('--cf-model',        type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more.caffemodel')
+parser.add_argument('--cf-prototxt', type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more_split_conv_layer.prototxt')
+parser.add_argument('--cf-model',        type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more_split_conv_layer.caffemodel')
 args = parser.parse_args()
 
 net = caffe.Net(args.cf_prototxt, caffe.TRAIN)
