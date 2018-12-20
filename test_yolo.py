@@ -33,6 +33,14 @@ def compare_models(prefix_caffe):
 
     print('conv21', net.blobs['conv21'].data[0][0][0])
     print len(net.params['conv1']), len(net.params['conv21'])
+
+    print('welllll\n\n')
+    print('relu22', net.blobs['relu22'].data.shape)
+    print(net.blobs['relu22'].data[0][0][0])
+    print(net.blobs['relu22'].data[0][0][1])
+    print('upsample1', net.blobs['upsample1'].data.shape)
+    print(net.blobs['upsample1'].data[0][0][0])
+    print(net.blobs['upsample1'].data[0][0][1])
     return
     print(net.blobs['conv21'].data[0][0][0])
     print(type(net.blobs['conv1'].data), net.blobs['conv1'].data.shape)

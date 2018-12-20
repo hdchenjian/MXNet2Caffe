@@ -44,7 +44,7 @@ layer {
 
 layer {
   name: "relu1"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn1"
   top: "relu1"
   relu_param{
@@ -89,7 +89,7 @@ layer {
 
 layer {
   name: "relu2"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn2"
   top: "relu2"
   relu_param{
@@ -132,7 +132,7 @@ layer {
 
 layer {
   name: "relu3"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn3"
   top: "relu3"
   relu_param{
@@ -175,7 +175,7 @@ layer {
 
 layer {
   name: "relu4"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn4"
   top: "relu4"
   relu_param{
@@ -229,7 +229,7 @@ layer {
 
 layer {
   name: "relu5"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn5"
   top: "relu5"
   relu_param{
@@ -272,7 +272,7 @@ layer {
 
 layer {
   name: "relu6"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn6"
   top: "relu6"
   relu_param{
@@ -315,7 +315,7 @@ layer {
 
 layer {
   name: "relu7"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn7"
   top: "relu7"
   relu_param{
@@ -369,7 +369,7 @@ layer {
 
 layer {
   name: "relu8"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn8"
   top: "relu8"
   relu_param{
@@ -412,7 +412,7 @@ layer {
 
 layer {
   name: "relu9"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn9"
   top: "relu9"
   relu_param{
@@ -455,7 +455,7 @@ layer {
 
 layer {
   name: "relu10"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn10"
   top: "relu10"
   relu_param{
@@ -509,7 +509,7 @@ layer {
 
 layer {
   name: "relu11"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn11"
   top: "relu11"
   relu_param{
@@ -552,7 +552,7 @@ layer {
 
 layer {
   name: "relu12"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn12"
   top: "relu12"
   relu_param{
@@ -595,7 +595,7 @@ layer {
 
 layer {
   name: "relu13"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn13"
   top: "relu13"
   relu_param{
@@ -649,7 +649,7 @@ layer {
 
 layer {
   name: "relu14"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn14"
   top: "relu14"
   relu_param{
@@ -692,7 +692,7 @@ layer {
 
 layer {
   name: "relu15"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn15"
   top: "relu15"
   relu_param{
@@ -735,7 +735,7 @@ layer {
 
 layer {
   name: "relu16"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn16"
   top: "relu16"
   relu_param{
@@ -789,7 +789,7 @@ layer {
 
 layer {
   name: "relu17"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn17"
   top: "relu17"
   relu_param{
@@ -832,7 +832,7 @@ layer {
 
 layer {
   name: "relu18"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn18"
   top: "relu18"
   relu_param{
@@ -875,7 +875,7 @@ layer {
 
 layer {
   name: "relu19"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn19"
   top: "relu19"
   relu_param{
@@ -918,7 +918,7 @@ layer {
 
 layer {
   name: "relu20"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn20"
   top: "relu20"
   relu_param{
@@ -978,7 +978,7 @@ layer {
 
 layer {
   name: "relu22"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn22"
   top: "relu22"
   relu_param{
@@ -1037,7 +1037,7 @@ layer {
 
 layer {
   name: "relu23"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn23"
   top: "relu23"
   relu_param{
@@ -1080,7 +1080,7 @@ layer {
 
 layer {
   name: "relu24"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn24"
   top: "relu24"
   relu_param{
@@ -1123,7 +1123,7 @@ layer {
 
 layer {
   name: "relu25"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn25"
   top: "relu25"
   relu_param{
@@ -1166,7 +1166,7 @@ layer {
 
 layer {
   name: "relu26"
-  type: "ReLU"
+  type: "PReLU"
   bottom: "bn26"
   top: "relu26"
   relu_param{
