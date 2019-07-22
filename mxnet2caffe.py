@@ -8,10 +8,11 @@ from array import array
 
 parser = argparse.ArgumentParser(description='Convert MXNet model to Caffe model')
 #parser.add_argument('--mx-model',        type=str, default='/var/darknet/insightface/models/model-r50-am-lfw/model')
-parser.add_argument('--mx-model',        type=str, default='/var/darknet/insightface/models/model-r100-ii/model')
+#parser.add_argument('--mx-model',        type=str, default='/var/darknet/insightface/models/model-r100-ii/model')
+parser.add_argument('--mx-model',        type=str, default='/var/darknet/insightface/models/model-r34-amf/model')
 parser.add_argument('--mx-epoch',        type=int, default=0)
-parser.add_argument('--cf-prototxt', type=str, default='model_caffe/face/facega2.prototxt')
-parser.add_argument('--cf-model',        type=str, default='model_caffe/face/facega2.caffemodel')
+parser.add_argument('--cf-prototxt', type=str, default='model_caffe/face_30/face_30.prototxt')
+parser.add_argument('--cf-model',        type=str, default='model_caffe/face_30/face_30.caffemodel')
 args = parser.parse_args()
 
 # ------------------------------------------
@@ -97,6 +98,7 @@ for i_key,key_i in enumerate(network_keys):
     except KeyError as e:
         traceback.print_exc()
         exit()
+net.save(args.cf_model)
 weight_file.close()
 '''
 net_1 = caffe.Net(args.cf_prototxt, caffe.TRAIN)
