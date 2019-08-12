@@ -15,8 +15,8 @@ parser = argparse.ArgumentParser(description='Convert MXNet model to Caffe model
 #parser.add_argument('--mx-model',        type=str, default='/var/darknet/insightface/models/model-r50-am-lfw/model')
 #parser.add_argument('--cf-prototxt', type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more.prototxt')
 #parser.add_argument('--cf-model',        type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more.caffemodel')
-parser.add_argument('--cf-prototxt', type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more_split_conv_layer.prototxt')
-parser.add_argument('--cf-model',        type=str, default='model_caffe/yolo-tiny-more/yolov3-tiny-more_split_conv_layer.caffemodel')
+parser.add_argument('--cf-prototxt', type=str, default='model_caffe/spoofing_residual/spoofing_cnn.prototxt')
+parser.add_argument('--cf-model',        type=str, default='model_caffe/spoofing_residual/spoofing_cnn.caffemodel')
 args = parser.parse_args()
 
 net = caffe.Net(args.cf_prototxt, caffe.TRAIN)
@@ -34,7 +34,7 @@ for line in f.readlines():
 f.close()
 #print(network_keys)
 
-weight_file = open('/home/luyao/download/Snapdragon/snpe-1.21.0/examples/NativeCpp/yolov3-tiny-more_final.weights', 'rb')
+weight_file = open('/home/luyao/git/cnn/model/spoofing_final.weights', 'rb')
 darknet_weight = weight_file.read()
 weight_file.close()
 print(struct.unpack("iiiii", darknet_weight[:20]), len(darknet_weight), (len(darknet_weight) - 20) / 4.0)

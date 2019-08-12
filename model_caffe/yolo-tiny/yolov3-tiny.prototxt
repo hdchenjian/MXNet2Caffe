@@ -126,7 +126,7 @@ layer {
 layer {
   name: "conv3"
   type: "Convolution"
-  bottom: "pool1"
+  bottom: "pool2"
   top: "conv3"
   convolution_param {
     bias_term: false
@@ -346,6 +346,8 @@ layer {
     pool: MAX
     kernel_size: 2
     stride: 1
+    pad_h: 1
+    pad_w: 1
   }
 }
 
@@ -403,7 +405,7 @@ layer {
     bias_term: false
     num_output: 256
     kernel_size: 1
-    pad: 1
+    pad: 0
     stride: 1
   }
 }
@@ -486,10 +488,10 @@ layer {
   bottom: "relu9"
   top: "conv10"
   convolution_param {
-    bias_term: false
+    bias_term: true
     num_output: 18
     kernel_size: 1
-    pad: 1
+    pad: 0
     stride: 1
   }
 }
@@ -500,12 +502,12 @@ layer{
   name: "conv11"
   type: "Convolution"
   bottom: "relu8"
-  top: "conv8"
+  top: "conv11"
   convolution_param {
     bias_term: false
     num_output: 128
     kernel_size: 1
-    pad: 1
+    pad: 0
     stride: 1
   }
 }
@@ -604,10 +606,10 @@ layer {
   bottom: "relu12"
   top: "conv13"
   convolution_param {
-    bias_term: false
+    bias_term: true
     num_output: 18
     kernel_size: 1
-    pad: 1
+    pad: 0
     stride: 1
   }
 }
